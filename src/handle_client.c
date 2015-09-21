@@ -56,13 +56,16 @@ static char			**retrieve_input(int fd, int read_size, const char *input)
 void				handle_client(int fd)
 {
 	unsigned int	n;
+	size_t			prompt_size;
 	char			buf[BUF_SIZE + 1];
 	char			**usr_input;
 
+	prompt_size = ft_strlen(PROMPT_STR);
 	while (42)
 	{
 		usr_input = NULL;
 		ft_bzero(buf, BUF_SIZE + 1);
+		send(fd, PROMPT_STR, prompt_size, 0);
 		n = read(fd, buf, BUF_SIZE);
 		if (!check_read_return(fd, n)
 			|| !(usr_input = retrieve_input(fd, n, buf)))

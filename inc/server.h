@@ -19,6 +19,8 @@
 # define SERVER_PORT	12345
 # define BUF_SIZE		5
 
+# define PROMPT_STR		"--> "
+
 # define TOKEN_LS		"ls"
 # define TOKEN_CD		"cd"
 # define TOKEN_GET		"get"
@@ -58,6 +60,14 @@ int							recieve_file(int fd, const char **input);
 int							print_working_directory(int fd, const char **input);
 int							close_client_connection(int fd, const char **input);
 
+void						init_server(void);
+void						handle_client(int fd);
+void						handle_client_command(int fd, char **input);
+void						respond(int fd, t_cmd_status stat, const char *msg);
+
+int							tokens_are_enough(const char **tokens, int qty);
+int							tokens_are_too_much(const char **tokens, int qty);
+
 static const t_cmd_match	g_cmd_match[] = {
 	{ TOKEN_LS, list_files },
 	{ TOKEN_CD, change_directory },
@@ -67,10 +77,5 @@ static const t_cmd_match	g_cmd_match[] = {
 	{ TOKEN_QUIT, close_client_connection },
 	{ NULL, NULL }
 };
-
-void						init_server(void);
-void						handle_client(int fd);
-void						handle_client_command(int fd, char **input);
-void						respond(int fd, t_cmd_status stat, const char *msg);
 
 #endif

@@ -24,7 +24,8 @@ SRC_FILES	=	main_server.c \
 				recieve_file.c \
 				print_working_directory.c \
 				close_client_connection.c \
-				respond.c
+				respond.c \
+				utils.c
 
 FTLST_DIR	=	./ftlst
 LIBFT_DIR	=	./libft

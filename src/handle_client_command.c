@@ -28,7 +28,6 @@ static int	(*get_cmd_function(const char *input))(int, const char **)
 	return (NULL);
 }
 
-
 void		handle_client_command(int fd, char **input)
 {
 	int		(*cmd_handler)(int, const char **);
@@ -37,5 +36,5 @@ void		handle_client_command(int fd, char **input)
 	if (!cmd_handler)
 		respond(fd, Failure, MSG_UNKNOWN_CMD);
 	else
-		respond(fd, Success, "Euker");
+		(*cmd_handler)(fd, (const char **)(input + 1));
 }
