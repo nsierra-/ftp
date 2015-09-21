@@ -17,7 +17,14 @@ INC_FILES	=
 SRC_FILES	=	main_server.c \
 				init_server.c \
 				handle_client.c \
-				handle_client_command.c
+				handle_client_command.c \
+				list_files.c \
+				change_directory.c \
+				send_file.c \
+				recieve_file.c \
+				print_working_directory.c \
+				close_client_connection.c \
+				respond.c
 
 FTLST_DIR	=	./ftlst
 LIBFT_DIR	=	./libft

@@ -61,6 +61,7 @@ void				handle_client(int fd)
 
 	while (42)
 	{
+		usr_input = NULL;
 		ft_bzero(buf, BUF_SIZE + 1);
 		n = read(fd, buf, BUF_SIZE);
 		if (!check_read_return(fd, n)
@@ -69,7 +70,8 @@ void				handle_client(int fd)
 			ft_free_tab(usr_input);
 			break ;
 		}
-		handle_client_command(fd, usr_input);
+		if (usr_input[0])
+			handle_client_command(fd, usr_input);
 		ft_free_tab(usr_input);
 	}
 	close(fd);

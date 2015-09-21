@@ -10,15 +10,32 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <sys/socket.h>
 #include "libft.h"
 #include "server.h"
 
-void		handle_client_command(int fd, char **input)
+static int	(*get_cmd_function(const char *input))(int, const char **)
 {
 	int		i;
 
-	(void)fd;
 	i = 0;
-	while (input[i] != NULL)
-		ft_putendl(input[i++]);
+	while (g_cmd_match[i].token && g_cmd_match[i].f)
+	{
+		if (!ft_strcmp(g_cmd_match[i].token, input))
+			return (g_cmd_match[i].f);
+		++i;
+	}
+	return (NULL);
+}
+
+
+void		handle_client_command(int fd, char **input)
+{
+	int		(*cmd_handler)(int, const char **);
+
+	cmd_handler = get_cmd_function(*input);
+	if (!cmd_handler)
+		respond(fd, Failure, MSG_UNKNOWN_CMD);
+	else
+		respond(fd, Success, "Euker");
 }
