@@ -14,7 +14,10 @@ NAME		=	server
 
 INC_FILES	=
 
-SRC_FILES	=	main_server.c
+SRC_FILES	=	main_server.c \
+				init_server.c \
+				handle_client.c \
+				handle_client_command.c
 
 FTLST_DIR	=	./ftlst
 LIBFT_DIR	=	./libft
@@ -26,7 +29,7 @@ OBJ			=	$(SRC:.c=.o)
 CC			=	gcc
 MAKE		=	make
 
-CFLAGS		=	-Wall -Wextra -Werror -pedantic
+CFLAGS		=	-Wall -Wextra -Werror -pedantic -g3
 IFLAGS		=	-I./inc/ -I$(LIBFT_DIR) -I$(FTLST_DIR)
 LDFLAGS		=	-L$(LIBFT_DIR) -lft -L$(FTLST_DIR) -lftlst
 
