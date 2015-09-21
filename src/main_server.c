@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_server.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By:  <>                                        +#+  +:+       +#+        */
+/*   By: nsierra- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/09/12 19:39:16 by                   #+#    #+#             */
-/*   Updated: 2015/09/12 19:39:50 by                  ###   ########.fr       */
+/*   Created: 2015/09/21 12:54:20 by nsierra-          #+#    #+#             */
+/*   Updated: 2015/09/21 12:54:26 by nsierra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 #include "libft.h"
 #include "server.h"
 
-void		accept_connection(void)
+void					accept_connection(void)
 {
-	struct			sockaddr_in6 client_addr;
-	unsigned int	client_addr_len;
-	int				new_sock_fd;
-	int				fd;
-	int				pid;
+	struct sockaddr_in6 client_addr;
+	unsigned int		client_addr_len;
+	int					new_sock_fd;
+	int					fd;
+	int					pid;
 
 	fd = g_server_data.socket_descriptor;
 	client_addr_len = sizeof(client_addr);
@@ -32,10 +32,9 @@ void		accept_connection(void)
 		close(new_sock_fd);
 }
 
-int			main(void)
+int						main(void)
 {
 	init_server();
-
 	while (42)
 	{
 		ft_putendl("Server is now waiting...");

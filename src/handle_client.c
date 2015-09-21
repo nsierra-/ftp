@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   handle_client.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nsierra- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/09/21 12:49:50 by nsierra-          #+#    #+#             */
+/*   Updated: 2015/09/21 12:49:51 by nsierra-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdlib.h>
 #include <unistd.h>
 #include "libft.h"
@@ -12,7 +24,7 @@ static int			check_read_return(int fd, int ret)
 	return (1);
 }
 
-static char			**retrieve_usr_input(int fd, int read_size, const char *input)
+static char			**retrieve_input(int fd, int read_size, const char *input)
 {
 	char			buf[BUF_SIZE + 1];
 	char			*tmp;
@@ -52,7 +64,7 @@ void				handle_client(int fd)
 		ft_bzero(buf, BUF_SIZE + 1);
 		n = read(fd, buf, BUF_SIZE);
 		if (!check_read_return(fd, n)
-			|| !(usr_input = retrieve_usr_input(fd, n, buf)))
+			|| !(usr_input = retrieve_input(fd, n, buf)))
 		{
 			ft_free_tab(usr_input);
 			break ;

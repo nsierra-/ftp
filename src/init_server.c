@@ -1,36 +1,49 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_server.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nsierra- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/09/21 12:50:06 by nsierra-          #+#    #+#             */
+/*   Updated: 2015/09/21 12:50:07 by nsierra-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdlib.h>
 #include "server.h"
 #include "libft.h"
 
-static void		open_socket(void)
+static void				open_socket(void)
 {
 	g_server_data.socket_descriptor = socket(AF_INET6, SOCK_STREAM, 0);
 	if (g_server_data.socket_descriptor < 0)
 		die("socket() failed", EXIT_FAILURE);
 }
 
-static void		set_reusable_socket_property(void)
+static void				set_reusable_socket_property(void)
 {
 	int		on;
-	int 	fd;
+	int		fd;
 
 	fd = g_server_data.socket_descriptor;
 	on = 1;
-	if (setsockopt(fd, SOL_SOCKET,  SO_REUSEADDR, (char *)&on, sizeof(on)) < 0)
+	if (setsockopt(fd, SOL_SOCKET, SO_REUSEADDR, (char *)&on, sizeof(on)) < 0)
 		close_and_die(fd, "setsockopt() failed", EXIT_FAILURE);
 }
 
-static void		set_listen_backlog(void)
+static void				set_listen_backlog(void)
 {
-	int fd = g_server_data.socket_descriptor;
+	int fd;
 
+	fd = g_server_data.socket_descriptor;
 	if (listen(fd, 32) < 0)
 		close_and_die(fd, "listen() failed", EXIT_FAILURE);
 }
 
-static void		bind_socket(void)
+static void				bind_socket(void)
 {
-	int fd;
+	int					fd;
 	struct sockaddr_in6	*addr;
 
 	fd = g_server_data.socket_descriptor;
@@ -43,7 +56,7 @@ static void		bind_socket(void)
 		close_and_die(fd, "bind() failed", EXIT_FAILURE);
 }
 
-void			init_server(void)
+void					init_server(void)
 {
 	open_socket();
 	set_reusable_socket_property();
