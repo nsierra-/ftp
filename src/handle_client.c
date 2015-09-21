@@ -32,7 +32,7 @@ static char			**retrieve_input(int fd, int read_size, const char *input)
 	char			**ret;
 
 	ret = NULL;
-	if (read_size < BUF_SIZE)
+	if (read_size < BUF_SIZE || input[BUF_SIZE - 1] == '\n')
 		return (ft_split(input, FT_WHITESPACE));
 	tmp = ft_strdup(input);
 	while (read_size == BUF_SIZE)
@@ -74,7 +74,9 @@ void				handle_client(int fd)
 			break ;
 		}
 		if (usr_input[0])
+		{
 			handle_client_command(fd, usr_input);
+		}
 		ft_free_tab(usr_input);
 	}
 	close(fd);
