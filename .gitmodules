@@ -1,0 +1,8 @@
+[submodule "ftlst"]
+	path = ftlst
+	url = https://github.com/nsierra-/ftlst.git
+	branch = 42
+[submodule "libft"]
+	path = libft
+	url = https://github.com/nsierra-/libft.git
+	branch = master
