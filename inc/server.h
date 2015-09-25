@@ -60,7 +60,7 @@ int							recieve_file(int fd, const char **input);
 int							print_working_directory(int fd, const char **input);
 int							close_client_connection(int fd, const char **input);
 
-void						init_server(void);
+void						init_server(const char *port);
 void						handle_client(int fd);
 void						handle_client_command(int fd, char **input);
 void						respond(int fd, t_cmd_status stat, const char *msg);

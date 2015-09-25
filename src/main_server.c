@@ -10,9 +10,27 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include <unistd.h>
 #include "libft.h"
 #include "server.h"
+
+static void				print_usage(void)
+{
+	ft_putendl("Usage : ./server port");
+}
+
+static int				check_port(const char *port_str)
+{
+	int					port;
+
+	port = ft_atoi(port_str);
+	if (port > 1023 && port < 65536)
+		return (1);
+	ft_putstr("The port argument must be a valid port number ");
+	ft_putendl("(from 1024 to 65535)");
+	return (0);
+}
 
 static void				accept_connection(void)
 {
@@ -32,9 +50,14 @@ static void				accept_connection(void)
 		close(new_sock_fd);
 }
 
-int						main(void)
+int						main(int ac, const char **av)
 {
-	init_server();
+	if (ac != 2 || !check_port(av[1]))
+	{
+		print_usage();
+		return (EXIT_FAILURE);
+	}
+	init_server(av[1]);
 	while (42)
 	{
 		ft_putendl("Server is now waiting...");
