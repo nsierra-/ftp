@@ -14,7 +14,7 @@
 #include "libft.h"
 #include "server.h"
 
-void					accept_connection(void)
+static void				accept_connection(void)
 {
 	struct sockaddr_in6 client_addr;
 	unsigned int		client_addr_len;
