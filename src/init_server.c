@@ -23,8 +23,8 @@ static void				open_socket(void)
 
 static void				set_reusable_socket_property(void)
 {
-	int		on;
-	int		fd;
+	int					on;
+	int					fd;
 
 	fd = g_server_data.socket_descriptor;
 	on = 1;
@@ -34,7 +34,7 @@ static void				set_reusable_socket_property(void)
 
 static void				set_listen_backlog(void)
 {
-	int fd;
+	int 				fd;
 
 	fd = g_server_data.socket_descriptor;
 	if (listen(fd, 32) < 0)
