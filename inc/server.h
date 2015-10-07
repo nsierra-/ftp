@@ -17,7 +17,7 @@
 # include <netinet/in.h>
 
 # define SERVER_PORT	12345
-# define BUF_SIZE		5
+# define BUF_SIZE		512
 
 # define PROMPT_STR		"--> "
 
